@@ -7,32 +7,140 @@
 }
 
 
+:root{
+    --cell-size:6.25rem;
+    --mark-size:calc((var(--cell-size)*.9));
+}
+
 body{
     font-family: 'Open Sans', sans-serif;
 }
 
-nav{
 
-    height: 4rem;
-    width: 100%;
+.board{
+    width: 100vw;
+    height: 100vh;
 
-    background-image: linear-gradient(to right, #4ade80,#d1fae5) ;
+    display:grid;
+    justify-content: center;
+    align-content: center;
 
+    /* it was vertically so change it in 3x3 box */
+    grid-template-columns: repeat(3,auto);
+    justify-items: center;
+    align-items: center;
+
+}
+
+
+.cell{
+    width: var(--cell-size);
+    height: var(--cell-size);
+    /* background-color: black; */
+    border: 1px solid rgb(1, 0, 0);
+    /* border: 1px solid white; */
+
+    position: relative;
     display: flex;
-    justify-content:start;
-    align-items:center;
-    padding-left: 1rem;
-  
-}
+    justify-content: center;
+    align-items: center;
 
-nav>ul>li{
- list-style: none;
+
+    cursor: pointer;
 }
 
 
-/* -------------- */
 
-.game-container{
-    background-color:blue;
-    width: ;
+
+/* lets remove some of the borders */
+/* learn about nth childs */
+
+.cell:first-child,.cell:nth-child(2),.cell:nth-child(3){
+    border-top: none;
 }
+
+.cell:nth-child(3n+1){
+    border-left: none;
+}
+
+.cell:nth-child(3n+3){
+    border-right: none;
+}
+.cell:last-child,.cell:nth-child(8),.cell:nth-child(7){
+    border-bottom: none;
+}
+
+/* individual x's and o's */
+
+.cell.x::before,.cell.x::after{
+ 
+    position: absolute;
+    content: '';
+    width:calc(var(--mark-size)*.15);
+    height: var(--mark-size);
+    background-color: black;
+}
+
+
+/* two different l's are shown now lets select one of them */
+
+.cell.x::before{
+
+    transform: rotate(45deg);
+    background-color: rgb(6, 6, 6);
+
+}
+
+.cell.x::after{
+
+    transform: rotate(-45deg);
+    background-color: rgb(22, 21, 21);
+
+}
+
+
+/* for circle */
+
+.cell.circle::before,.cell.circle::after{
+ 
+    position: absolute;
+    content: '';
+    width:var(--mark-size);
+    height: var(--mark-size);
+    /* background-color: black; */
+}
+
+
+.cell.circle::before{
+
+    /* transform: rotate(45deg); */
+    /* background-color: red; */
+
+    width:var(--mark-size);
+    height: var(--mark-size);
+    border-radius: 50%;
+
+    background-color:black;
+}
+
+.cell.circle::after{
+
+   
+
+    width:calc(var(--mark-size)*0.7);
+    height: calc(var(--mark-size)*0.7);
+    border-radius: 50%;
+    background-color: white;
+
+}
+
+
+
+/* not allowed part-->if it has the element then we are not allowed to enter any new elements */
+
+
+.cell.x,.cell.circle{
+    cursor: not-allowed;
+    
+}
+

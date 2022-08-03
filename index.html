@@ -5,33 +5,35 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
-    <script src="app.js" defer></script>
+    <!-- <script src="app.js" defer></script> -->
+    <script src="scriptTest.js" defer></script>
+
 
     
     <title>TIC-TAC-TOE</title>
 </head>
 <body>
     
+<!-- board and inside the board we have cell -->
+  <div class="board" id="board">
 
-    <nav>
-        <ul><li>Tic tac toe Game</li></ul>
-    </nav>
-
-    <!-- the box -->
-
-
-
-    <div class="game-container">
-        <div class="box box--1"><span>x</span></div>
-        <div class="box box--2"><span>x</span></div>
-        <div class="box box--3"><span>x</span></div>
-        <div class="box box--4"><span>x</span></div>
-        <div class="box box--5"><span>x</span></div>
-        <div class="box box--6"><span>x</span></div>
-        <div class="box box--7"><span>x</span></div>
-        <div class="box box--8"><span>x</span></div>
-        <div class="box box--9"><span>x</span></div>
-    </div>
+   
+    <div class="cell" data-cell></div>
+    <div class="cell" data-cell></div>
+    <div class="cell" data-cell></div>
+    <div class="cell" data-cell></div>
+    <div class="cell" data-cell></div>
+    <div class="cell" data-cell></div>
+    <div class="cell" data-cell></div>
+    <div class="cell" data-cell></div>
+    <div class="cell" data-cell></div>
+  </div>
+    
+    
+  <div class="winning-message" id="winning-message">
+    <div data-wining-message-text></div>
+    <button class="restart" id="restart-btn">RESTART</button>
+  </div>
 
 
 

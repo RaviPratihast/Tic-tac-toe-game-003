@@ -1,61 +1,70 @@
+"use strict";
+// selecting all the cell element
+const WINNING_COMBINATIONS = [
+  [0, 1, 2],
+  [3, 4, 5],
+  [6, 7, 8],
+  [0, 3, 6],
+  [1, 4, 7],
+  [2, 5, 8],
+  [0, 4, 8],
+  [2, 4, 6],
+];
+
 /*
-Q. write a javascript program to check two numbers and return true if one of the number is 100 or if the sum of the two numbers is 100.
+
+
 */
 
-const checkNumbers = function (a, b) {
-  // 1--check the numbers are 100 or not? if it is 100 then return true or else return
+const cellElements = document.querySelectorAll(".cell");
+// cellElements.forEach((e) => e.classList.add("x"));
+let circleTurn;
+// console.log(circleTurn);
 
-  if (a === 100 || b === 100 || a + b === 100) {
-    return true;
-  } else {
-    return false;
+cellElements.forEach((e) => {
+  e.addEventListener("click", handleClick, { once: true });
+});
+
+// what ever is going to happen it will happen inside the handleclick function
+
+function handleClick(e) {
+  const cell = e.target;
+  console.log(cell);
+  // console.log(circleTurn.value);
+
+  // as we have not given any value to the circleTurn so it 'undefined' so by default it becomes falsy value.
+  const currentClass = circleTurn ? "circle" : "x";
+  // console.log(currentClass);
+
+  // place marker on the game box.
+  placeMarker(cell, currentClass);
+
+  // check for the win
+  if (checkWin(currentClass)) {
+    console.log("winner", currentClass);
   }
-};
+  // check for the draw
+  // switch turns
+  switchTurn();
+}
 
-// console.log(checkNumbers(100, 50));
+// function for the place marker.
+function placeMarker(cell, currentClass) {
+  cell.classList.add(currentClass);
+}
 
-/*
-Q. write a javascript program to get the extension of a file name?
-*/
+// function for switch turns
 
-const lastFileName = (str) => str.slice(str.lastIndexOf("."));
-// console.log(lastFileName("wejorjoar.app"));
-//
+function switchTurn() {
+  circleTurn = !circleTurn;
+}
 
-/*
-Q. Write a javascript program to replace every character in a given string with the character following it in the alphabet.
-*/
+// check win
 
-const moveCharsForward = (str) =>
-  str
-    .split("")
-    .map((char, i) => String.fromCharCode(char.charCodeAt(0) - 1))
-    .join("");
-
-// console.log(moveCharsForward("what"));
-
-/*
-Q. Write a JavaScript Program to get the current date.
-Expected Output:
-
-   mm-dd-yyyy, mm/dd/yyyy or dd-mm-yyyy, dd/mm/yyyy
-
-*/
-
-const today = new Date();
-
-// console.log(year, month, day);
-
-const formatDate = (date = new Date()) => {
-  // console.log(date);
-  const year = today.getFullYear();
-  const month = today.getMonth() + 1;
-  const day = today.getDate();
-
-  // console.log(`${month}-${day}-${year}`);
-  // console.log(`${month}/${day}/${year}`);
-  // console.log(`${day}-${month}-${year}`);
-  // console.log(`${day}/${month}/${year}`);
-};
-
-formatDate();
+function checkWin(currentClass) {
+  return WINNING_COMBINATIONS.some((comb) => {
+    return comb.every((index) => {
+      return cellElements[index].classList.contains(currentClass);
+    });
+  });
+}
