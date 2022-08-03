@@ -117,7 +117,7 @@ function winner(currentClass) {
   if (winnerVar) {
     document.querySelector(
       ".board"
-    ).innerHTML = `<div><h1>winner is ${currentClass}</h1></div>`;
+    ).innerHTML = `<div><h1>winner is ${currentClass}😀😀</h1></div>`;
   } else if (!winnerVar && arrCirclePos.length + arrXpos.length === 9) {
     document.querySelector(
       ".board"
